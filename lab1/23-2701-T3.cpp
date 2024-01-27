@@ -27,7 +27,12 @@ void encryption(string &input){
 }
 void decryption(string &input){
     for(int i=0; i<input.size();i++){
-        input[i]=(char)(((input[i]-'A')%26)+'a');
+        input[i]=input[i]-'a';
+        if(table[1][i]>input[i])
+            input[i]=(input[i]+26);
+            // input[i]=(char)(((input[i]-table[1][i])%26)+'a');
+                
+        input[i]=(char)(((input[i]-table[1][i])%26)+'a');
     }
 }
 int main(){
@@ -39,9 +44,7 @@ int main(){
     print(2,input.size());
     encryption(input);
     cout<<"Encrypted text: "<<input<<endl;
-    // decryption(input);
-    // cout<<"decrypted text: "+input<<endl;
-    // string s="abc";
-    // int p=s[2];
-    // cout<<p<<endl;
+    decryption(input);
+    cout<<"decrypted text: "+input<<endl;
+
 }
