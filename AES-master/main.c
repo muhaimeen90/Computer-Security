@@ -1,65 +1,19 @@
-/*
- * Advanced Encryption Standard
- * @author Dani Huertas
- * @email huertas.dani@gmail.com
- *
- * Based on the document FIPS PUB 197
- */
 #include <stdio.h>
 
 #include "aes.h"
-/*
- * Advanced Encryption Standard
- * @author Dani Huertas
- * @email huertas.dani@gmail.com
- *
- * Based on the document FIPS PUB 197
- */
 #include "aes.h"
 #include "gmult.h"
 
-/*
- * Addition in GF(2^8)
- * http://en.wikipedia.org/wiki/Finite_field_arithmetic
- */
 uint8_t gadd(uint8_t a, uint8_t b) {
 	return a^b;
 }
 
-/*
- * Subtraction in GF(2^8)
- * http://en.wikipedia.org/wiki/Finite_field_arithmetic
- */
+
 uint8_t gsub(uint8_t a, uint8_t b) {
 	return a^b;
 }
 
-/*
- * Multiplication in GF(2^8)
- * http://en.wikipedia.org/wiki/Finite_field_arithmetic
- * Irreducible polynomial m(x) = x8 + x4 + x3 + x + 1
- *
- * NOTE: This function can be easily replaced with a look up table for a speed
- *       boost, at the expense of an increase in memory size (around 65 KB). See
- *       the aes.h header file to find the macro definition.
-uint8_t gmult(uint8_t a, uint8_t b) {
 
-	uint8_t p = 0, i = 0, hbs = 0;
-
-	for (i = 0; i < 8; i++) {
-		if (b & 1) {
-			p ^= a;
-		}
-
-		hbs = a & 0x80;
-		a <<= 1;
-		if (hbs) a ^= 0x1b; // 0000 0001 0001 1011
-		b >>= 1;
-	}
-
-	return (uint8_t)p;
-}
-*/
 
 /*
  * Addition of 4 byte words
@@ -475,13 +429,7 @@ void aes_inv_cipher(uint8_t *in, uint8_t *out, uint8_t *w) {
 		}
 	}
 }
-/*
- * Advanced Encryption Standard
- * @author Dani Huertas
- * @email huertas.dani@gmail.com
- *
- * Based on the document FIPS PUB 197
- */
+
 #include "gmult.h"
 
 // Lookup table for multiplication in GF(2^8)
